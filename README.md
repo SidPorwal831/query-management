@@ -7,10 +7,10 @@
 * Display query results in a separate view with real-time updates.
 
 ## Project Structure
-query-manager.component.ts: Handles adding and removing queries.
-query-results.component.ts: Displays the results of executed queries.
-query.service.ts: Manages API calls and query scheduling.
-db.json: Contains mock data for APIs and query testing.
+* src/app/components/query-manager.component.ts: Handles adding and removing queries.
+* src/app/query-results.component.ts: Handles the results of executed queries.
+* src/app/services/query.service.ts: Manages API calls and query scheduling.
+* db.json: Contains mock data for APIs and query testing.
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.1.
 
