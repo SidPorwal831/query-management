@@ -1,0 +1,39 @@
+<div class="container">
+  <h1>Query Results</h1>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="loading" class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+
+  <table class="table" *ngIf="!loading && queryResults.length > 0">
+    <thead>
+      <tr>
+        <th>Query Name</th>
+        <th>Results</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let result of queryResults">
+        <td>{{ result.name }}</td>
+        <td>
+          <ng-container *ngIf="result.results.length === 1">
+            {{ result.results[0] }}
+          </ng-container>
+          <ul *ngIf="result.results.length > 1">
+            <li *ngFor="let item of result.results">
+              {{ item }}
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && queryResults.length === 0" class="alert alert-info">
+    No queries have been executed yet.
+  </div>
+</div>

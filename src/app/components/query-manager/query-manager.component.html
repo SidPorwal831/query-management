@@ -1,0 +1,135 @@
+<div class="container">
+    <!-- Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h1>Scheduled Queries</h1>
+      <button class="btn btn-primary" (click)="toggleAddQueryForm()">Add Query</button>
+    </div>
+  
+    <!-- Query Table -->
+    <table class="table" *ngIf="!showAddQueryForm">
+      <thead>
+        <tr>
+          <th>Query Name</th>
+          <th>Interval</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let query of queries; let i = index">
+          <td>{{ query.name }}</td>
+          <td>{{ query.interval }} seconds</td>
+          <td>
+            <button class="btn btn-danger" (click)="removeQuery(query.id)">Remove</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Query Form -->
+    <div *ngIf="showAddQueryForm" class="add-query-form border p-4 rounded bg-light">
+      <h2 class="mb-3">Add Query</h2>
+      <form (ngSubmit)="addQuery()">
+        <div class="form-group mb-3">
+          <label for="name">Enter Query Name:</label>
+          <input
+            id="name"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': isDuplicateName }"
+            [(ngModel)]="newQuery.name"
+            name="name"
+            required
+            (input)="checkDuplicateName()"
+            autocomplete="off"
+          />
+          <div *ngIf="isDuplicateName" class="invalid-feedback">
+            This query name already exists. Please choose a different name.
+          </div>
+        </div>
+  
+        <!-- Interval -->
+        <div class="form-group mb-3">
+          <label for="interval">Choose Interval (seconds):</label>
+          <input
+            id="interval"
+            class="form-control"
+            type="number"
+            [(ngModel)]="newQuery.interval"
+            name="interval"
+            required
+            autocomplete="off"
+          />
+        </div>
+  
+        <!-- API Selection -->
+        <div class="form-group mb-3">
+          <label for="api">Choose API:</label>
+          <select
+            id="api"
+            class="form-control"
+            [(ngModel)]="newQuery.api"
+            name="api"
+            (change)="updateAvailableParameters()"
+            required
+          >
+            <option *ngFor="let api of availableApis" [ngValue]="api.name">
+              {{ api.name }}
+            </option>
+          </select>
+        </div>
+  
+        <!-- Query Parameters -->
+        <div class="form-group mb-3">
+          <label for="parameter">Choose Query Parameter:</label>
+          <select
+            id="parameter"
+            class="form-control"
+            [(ngModel)]="newQuery.selectedQueryParam"
+            name="selectedQueryParam"
+            (change)="addQueryParameter()"
+          >
+            <option *ngFor="let param of availableParameters" [value]="param">
+              {{ param }}
+            </option>
+          </select>
+        </div>
+  
+        <!-- Parameter Values -->
+        <div *ngFor="let param of objectKeys(newQuery.params)" class="form-group mb-3">
+          <label>{{ param }}:</label>
+          <input
+            type="text"
+            autocomplete="off"
+            class="form-control"
+            placeholder="Enter value for {{ param }}"
+            [(ngModel)]="newQuery.params[param]"
+            [name]="'param_' + param"
+            (blur)="validateParameter(param)" 
+            [ngClass]="{ 'is-invalid': validationErrors[param] }"
+  />
+            <div *ngIf="validationErrors[param]" class="invalid-feedback">
+    {{ validationErrors[param] }}
+  </div>
+</div>
+    
+        <div class="form-group mb-3">
+          <label for="responseAttribute">Choose Response Attribute:</label>
+          <select
+            id="responseAttribute"
+            class="form-control"
+            [(ngModel)]="newQuery.responseAttribute"
+            name="responseAttribute"
+            required
+          >
+            <option *ngFor="let attribute of availableResponseAttributes" [value]="attribute">
+              {{ attribute }}
+            </option>
+          </select>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-success me-2" type="submit">Save</button>
+          <button class="btn btn-secondary" type="button" (click)="toggleAddQueryForm()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

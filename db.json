@@ -1,0 +1,127 @@
+{
+  "queries": [
+    {
+      "id": "68de",
+      "name": "Price",
+      "interval": 5,
+      "api": "Popular Books",
+      "params": {
+        "Genre": "Fantasy"
+      },
+      "selectedQueryParam": "Genre",
+      "responseAttribute": "Title"
+    }
+  ],
+  "apis": [
+    {
+      "id": "1",
+      "name": "Popular Books",
+      "queryParameters": [
+        "Author",
+        "Genre"
+      ],
+      "responseAttributes": [
+        "Title",
+        "Author",
+        "Genre",
+        "Price"
+      ],
+      "mockData": [
+        {
+          "Title": "Book A",
+          "Author": "John Smith",
+          "Genre": "Fantasy",
+          "Price": 21
+        },
+        {
+          "Title": "Book B",
+          "Author": "Jane Doe",
+          "Genre": "Sci-Fi",
+          "Price": 25
+        },
+        {
+          "Title": "Book C",
+          "Author": "Vivienne Allegra",
+          "Genre": "Mystery",
+          "Price": 30
+        },
+        {
+          "Title": "Book D",
+          "Author": "Alice Johnson",
+          "Genre": "Fiction",
+          "Price": 40
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Old Books",
+      "queryParameters": [
+        "Genre",
+        "PublicationYear"
+      ],
+      "responseAttributes": [
+        "Title",
+        "Author",
+        "PublicationYear",
+        "Price"
+      ],
+      "mockData": [
+        {
+          "Title": "The Alchemist",
+          "Author": "Author G",
+          "Genre": "Fiction",
+          "PublicationYear": 2000,
+          "Price": 10
+        },
+        {
+          "Title": "Book F",
+          "Author": "Author o",
+          "Genre": "Sci-Fi",
+          "PublicationYear": 1995,
+          "Price": 18
+        },
+        {
+          "Title": "Book G",
+          "Author": "Author Y",
+          "Genre": "Mystery",
+          "PublicationYear": 2012,
+          "Price": 20
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Books from Library",
+      "queryParameters": [
+        "Price",
+        "PublicationYear"
+      ],
+      "responseAttributes": [
+        "Title",
+        "Author",
+        "Price"
+      ],
+      "mockData": [
+        {
+          "Title": "Book H",
+          "Author": "Author Sambyal",
+          "Price": 10,
+          "PublicationYear": 2019
+        },
+        {
+          "Title": "Book I",
+          "Author": "Author W",
+          "Price": 15,
+          "PublicationYear": 2024
+        },
+        {
+          "Title": "Book Potter",
+          "Author": "Author Pratistha",
+          "Price": 25,
+          "PublicationYear": 2022
+        }
+      ]
+    }
+  ]
+}
